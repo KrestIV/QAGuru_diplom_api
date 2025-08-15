@@ -1,4 +1,4 @@
-package helpers;
+package models;
 
 public enum PetStatus {
     AVAILABLE("available"),

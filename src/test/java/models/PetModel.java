@@ -1,7 +1,6 @@
 package models;
 
 import com.github.javafaker.Faker;
-import helpers.PetStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
