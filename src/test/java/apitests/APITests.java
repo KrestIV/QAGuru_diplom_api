@@ -1,9 +1,11 @@
-package api;
+package apitests;
 
 import models.ConfirmMessageModel;
 import models.PetModel;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
 
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -35,13 +37,8 @@ public class APITests extends APIBaseTests {
             assertThat(petResult.getId()).isNotEqualTo(0);
             assertThat(petResult.getCategory().getId()).isEqualTo(pet.getCategory().getId());
             assertThat(petResult.getCategory().getName()).isEqualTo(pet.getCategory().getName());
-            for (int i = 0; i < petResult.getPhotoUrls().length; i++) {
-                assertThat(petResult.getPhotoUrls()[i]).isEqualTo(pet.getPhotoUrls()[i]);
-            }
-            for (int i = 0; i < petResult.getTags().length; i++) {
-                assertThat(petResult.getTags()[i].getId()).isEqualTo(pet.getTags()[i].getId());
-                assertThat(petResult.getTags()[i].getName()).isEqualTo(pet.getTags()[i].getName());
-            }
+            assertThat(petResult.getPhotoUrls()).hasSameElementsAs(Arrays.stream(pet.getPhotoUrls()).toList());
+            assertThat(petResult.getTags()).hasSameElementsAs(Arrays.stream(pet.getTags()).toList());
             assertThat(petResult.getStatus()).isEqualTo(pet.getStatus());
         });
     }
@@ -60,7 +57,7 @@ public class APITests extends APIBaseTests {
                         .spec(responseSpec(200))
                         .extract().as(PetModel.class).getId());
 
-        PetModel PetResult = step("Получить данные питомца по его id", () -> given(requestNoContentSpec)
+        PetModel petResult = step("Получить данные питомца по его id", () -> given(requestNoContentSpec)
                 .when()
                 .get("/" + id)
                 .then()
@@ -68,17 +65,12 @@ public class APITests extends APIBaseTests {
                 .extract().as(PetModel.class));
 
         step("Проверить соответствие отправленных и сохраненных данных", () -> {
-            assertThat(PetResult.getId()).isEqualTo(id);
-            assertThat(PetResult.getCategory().getId()).isEqualTo(pet.getCategory().getId());
-            assertThat(PetResult.getCategory().getName()).isEqualTo(pet.getCategory().getName());
-            for (int i = 0; i < PetResult.getPhotoUrls().length; i++) {
-                assertThat(PetResult.getPhotoUrls()[i]).isEqualTo(pet.getPhotoUrls()[i]);
-            }
-            for (int i = 0; i < PetResult.getTags().length; i++) {
-                assertThat(PetResult.getTags()[i].getId()).isEqualTo(pet.getTags()[i].getId());
-                assertThat(PetResult.getTags()[i].getName()).isEqualTo(pet.getTags()[i].getName());
-            }
-            assertThat(PetResult.getStatus()).isEqualTo(pet.getStatus());
+            assertThat(petResult.getId()).isEqualTo(id);
+            assertThat(petResult.getCategory().getId()).isEqualTo(pet.getCategory().getId());
+            assertThat(petResult.getCategory().getName()).isEqualTo(pet.getCategory().getName());
+            assertThat(petResult.getPhotoUrls()).hasSameElementsAs(Arrays.stream(pet.getPhotoUrls()).toList());
+            assertThat(petResult.getTags()).hasSameElementsAs(Arrays.stream(pet.getTags()).toList());
+            assertThat(petResult.getStatus()).isEqualTo(pet.getStatus());
         });
 
     }

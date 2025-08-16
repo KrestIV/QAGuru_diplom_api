@@ -1,4 +1,4 @@
-package api;
+package apitests;
 
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
