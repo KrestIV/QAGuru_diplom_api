@@ -23,14 +23,14 @@ public class PetModel {
 
         int k = faker.number().numberBetween(0,5);
         String[] urlArray = new String[k];
-        for(int i = 0; i <= k; i++)
+        for(int i = 0; i < k; i++)
         {
             urlArray[i] = faker.internet().url();
         }
 
         k = faker.number().numberBetween(0,5);
         PetTagModel[] tagArray = new PetTagModel[k];
-        for(int i = 0; i <= k; i++)
+        for(int i = 0; i < k; i++)
         {
             tagArray[i] = new PetTagModel(faker.number().numberBetween(0L, Long.MAX_VALUE), faker.color().name());
         }
