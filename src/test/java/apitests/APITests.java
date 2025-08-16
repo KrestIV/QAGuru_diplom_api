@@ -1,5 +1,6 @@
 package apitests;
 
+import com.github.javafaker.Faker;
 import models.ConfirmMessageModel;
 import models.PetModel;
 import org.junit.jupiter.api.Tag;
@@ -15,13 +16,13 @@ import static specs.RequestSpec.*;
 @Tag("APITests")
 @Tag("FullTest")
 public class APITests extends APIBaseTests {
-
+    public Faker faker = new Faker();
 
     @Test
             //@Tag("user_tests")
     public void addingPetMustReturnCorrectAnswer() throws InterruptedException {
         PetModel pet = step("Подготовить данные питомца для добавления в базу", () ->
-                new PetModel());
+                new PetModel(faker));
 
 
         PetModel petResult = step("Послать данные питомца в базу и получить подтверждение", () ->
@@ -47,7 +48,7 @@ public class APITests extends APIBaseTests {
     @Test
     public void gettingPetMustReturnPet() throws InterruptedException {
         PetModel pet = step("Подготовить данные питомца для добавления в базу", () ->
-                new PetModel());
+                new PetModel(faker));
 
         long id = step("Послать данные питомца в базу и получить присвоенный ему id", () ->
                 given(requestWithJsonContentSpec)
@@ -81,7 +82,7 @@ public class APITests extends APIBaseTests {
     @Test
     public void deletingPetMustReturnCorrectResponse() throws InterruptedException {
         PetModel pet = step("Подготовить данные питомца для добавления в базу", () ->
-                new PetModel());
+                new PetModel(faker));
 
         long id = step("Послать данные питомца в базу и получить присвоенный ему id", () ->
                 given(requestWithJsonContentSpec)
@@ -113,7 +114,7 @@ public class APITests extends APIBaseTests {
     @Test
     public void editPetNameMustSaveInBase() throws InterruptedException {
         PetModel pet = step("Подготовить данные питомца для добавления в базу", () ->
-                new PetModel());
+                new PetModel(faker));
 
         long id = step("Послать данные питомца в базу и получить присвоенный ему id", () ->
                 given(requestWithJsonContentSpec)
@@ -149,7 +150,7 @@ public class APITests extends APIBaseTests {
     @Test
     public void editThroughPostPetMustSaveInBase() throws InterruptedException {
         PetModel pet = step("Подготовить данные питомца для добавления в базу", () ->
-                new PetModel());
+                new PetModel(faker));
 
         long id = step("Послать данные питомца в базу и получить присвоенный ему id", () ->
                 given(requestWithJsonContentSpec)
