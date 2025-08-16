@@ -19,7 +19,7 @@ public class APITests extends APIBaseTests {
 
     @Test
             //@Tag("user_tests")
-    public void addingPetMustReturnCorrectAnswer() {
+    public void addingPetMustReturnCorrectAnswer() throws InterruptedException {
         PetModel pet = step("Подготовить данные питомца для добавления в базу", () ->
                 new PetModel());
 
@@ -32,6 +32,7 @@ public class APITests extends APIBaseTests {
                         .then()
                         .spec(responseSpec(200))
                         .extract().as(PetModel.class));
+        Thread.sleep(1000);
 
         step("Проверить соответствие отправленных и сохраненных данных", () -> {
             assertThat(petResult.getId()).isNotEqualTo(0);
@@ -44,7 +45,7 @@ public class APITests extends APIBaseTests {
     }
 
     @Test
-    public void gettingPetMustReturnPet() {
+    public void gettingPetMustReturnPet() throws InterruptedException {
         PetModel pet = step("Подготовить данные питомца для добавления в базу", () ->
                 new PetModel());
 
@@ -56,6 +57,8 @@ public class APITests extends APIBaseTests {
                         .then()
                         .spec(responseSpec(200))
                         .extract().as(PetModel.class).getId());
+
+        Thread.sleep(1000);
 
         PetModel petResult = step("Получить данные питомца по его id", () -> given(requestNoContentSpec)
                 .when()
@@ -76,7 +79,7 @@ public class APITests extends APIBaseTests {
     }
 
     @Test
-    public void deletingPetMustReturnCorrectResponse() {
+    public void deletingPetMustReturnCorrectResponse() throws InterruptedException {
         PetModel pet = step("Подготовить данные питомца для добавления в базу", () ->
                 new PetModel());
 
@@ -88,6 +91,8 @@ public class APITests extends APIBaseTests {
                         .then()
                         .spec(responseSpec(200))
                         .extract().as(PetModel.class).getId());
+
+        Thread.sleep(1000);
 
         ConfirmMessageModel deleteMessage = step("Удалить питомца из базы и получить подтверждение удаления", () ->
                 given(requestNoContentSpec)
@@ -106,7 +111,7 @@ public class APITests extends APIBaseTests {
     }
 
     @Test
-    public void editPetNameMustSaveInBase() {
+    public void editPetNameMustSaveInBase() throws InterruptedException {
         PetModel pet = step("Подготовить данные питомца для добавления в базу", () ->
                 new PetModel());
 
@@ -118,6 +123,7 @@ public class APITests extends APIBaseTests {
                         .then()
                         .spec(responseSpec(200))
                         .extract().as(PetModel.class).getId());
+        Thread.sleep(1000);
 
         step("Подготовить измененные данные питомца", () -> {
             pet.setName("BillBurr");
@@ -141,7 +147,7 @@ public class APITests extends APIBaseTests {
     }
 
     @Test
-    public void editThroughPostPetMustSaveInBase() {
+    public void editThroughPostPetMustSaveInBase() throws InterruptedException {
         PetModel pet = step("Подготовить данные питомца для добавления в базу", () ->
                 new PetModel());
 
@@ -153,6 +159,8 @@ public class APITests extends APIBaseTests {
                         .then()
                         .spec(responseSpec(200))
                         .extract().as(PetModel.class).getId());
+
+        Thread.sleep(1000);
 
         ConfirmMessageModel changeMessage = step("Послать данные питомца в базу и получить присвоенный ему id", () ->
                 given(requestWithFormContentSpec)
