@@ -1,23 +1,18 @@
 package apitests;
 
-import com.codeborne.selenide.logevents.SelenideLogger;
-import io.qameta.allure.selenide.AllureSelenide;
+import com.codeborne.selenide.Configuration;
+import config.LaunchConfig;
 import io.restassured.RestAssured;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 
 public class APIBaseTests {
 
     @BeforeAll
     static void beforeAll() {
-        RestAssured.baseURI = "https://petstore.swagger.io/v2/pet";
+        LaunchConfig config = ConfigFactory.create(LaunchConfig.class, System.getProperties());
 
-        //Configuration.remote = getServer();
+        Configuration.remote = config.getServerAddress();
+        RestAssured.baseURI = config.getBaseUrl();
     }
-
-    @BeforeEach
-    public void enableAllureListener() {
-        SelenideLogger.addListener("allure", new AllureSelenide());
-    }
-
 }

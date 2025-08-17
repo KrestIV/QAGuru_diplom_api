@@ -4,25 +4,14 @@ import org.aeonbits.owner.Config;
 
 @Config.Sources({
         "classpath:${platform}.config",
+        "classpath:${platform}.items.config",
         "system:properties"
 })
 public interface LaunchConfig extends Config {
-    @Key("browser.name")
-    String getBrowserName();
+    @Key("url.base")
+    String getBaseUrl();
 
-    @Key("browser.version")
-    String getBrowserVersion();
-
-    @Key("browser.size")
-    String getBrowserSize();
-
-    @Key("server.address")
+    @Key("server")
     String getServerAddress();
-
-    @Key("login")
-    String getShopLogin();
-
-    @Key("pw")
-    String getShopPassword();
 
 }
