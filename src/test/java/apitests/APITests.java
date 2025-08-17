@@ -16,10 +16,10 @@ import static specs.RequestSpec.*;
 @Tag("APITests")
 @Tag("FullTest")
 public class APITests extends APIBaseTests {
-    public Faker faker = new Faker();
+    public final Faker faker = new Faker();
 
     @Test
-            //@Tag("user_tests")
+    @Tag("smoke")
     public void addingPetMustReturnCorrectAnswer() throws InterruptedException {
         PetModel pet = step("Подготовить данные питомца для добавления в базу", () ->
                 new PetModel(faker));
@@ -80,6 +80,7 @@ public class APITests extends APIBaseTests {
     }
 
     @Test
+    @Tag("smoke")
     public void deletingPetMustReturnCorrectResponse() throws InterruptedException {
         PetModel pet = step("Подготовить данные питомца для добавления в базу", () ->
                 new PetModel(faker));
@@ -148,6 +149,7 @@ public class APITests extends APIBaseTests {
     }
 
     @Test
+    @Tag("smoke")
     public void editThroughPostPetMustSaveInBase() throws InterruptedException {
         PetModel pet = step("Подготовить данные питомца для добавления в базу", () ->
                 new PetModel(faker));

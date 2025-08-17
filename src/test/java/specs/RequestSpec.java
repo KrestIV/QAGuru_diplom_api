@@ -12,17 +12,17 @@ import static io.restassured.http.ContentType.URLENC;
 
 public class RequestSpec {
 
-    public static RequestSpecification requestWithFormContentSpec = with()
+    public static final RequestSpecification requestWithFormContentSpec = with()
             .filter(withCustomTemplates())
             .log().all()
             .contentType(URLENC.withCharset("UTF-8"));
 
-    public static RequestSpecification requestWithJsonContentSpec = with()
+    public static final RequestSpecification requestWithJsonContentSpec = with()
             .filter(withCustomTemplates())
             .log().all()
             .contentType(JSON);
 
-    public static RequestSpecification requestNoContentSpec = with()
+    public static final RequestSpecification requestNoContentSpec = with()
             .filter(withCustomTemplates())
             .log().all();
 

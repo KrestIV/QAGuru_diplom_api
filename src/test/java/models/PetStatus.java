@@ -1,5 +1,8 @@
 package models;
 
+import lombok.Getter;
+
+@Getter
 public enum PetStatus {
     AVAILABLE("available"),
     PENDING("pending"),
@@ -9,10 +12,6 @@ public enum PetStatus {
 
     PetStatus(String title) {
         this.status = title;
-    }
-
-    public String getStatus() {
-        return status;
     }
 
     @Override
