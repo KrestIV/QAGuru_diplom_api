@@ -21,17 +21,15 @@ public class PetModel {
         this.category = new PetCategoryModel(faker.number().numberBetween(0L, Long.MAX_VALUE), faker.animal().name());
         this.name = faker.dog().name();
 
-        int k = faker.number().numberBetween(0,5);
+        int k = faker.number().numberBetween(0, 5);
         this.photoUrls = new String[k];
-        for(int i = 0; i < k; i++)
-        {
+        for (int i = 0; i < k; i++) {
             this.photoUrls[i] = faker.internet().url();
         }
 
-        k = faker.number().numberBetween(0,5);
+        k = faker.number().numberBetween(0, 5);
         this.tags = new PetTagModel[k];
-        for(int i = 0; i < k; i++)
-        {
+        for (int i = 0; i < k; i++) {
             this.tags[i] = new PetTagModel(faker.number().numberBetween(0L, Long.MAX_VALUE), faker.color().name());
         }
 

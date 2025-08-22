@@ -8,9 +8,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
+import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
-import static io.qameta.allure.Allure.step;
 import static specs.RequestSpec.*;
 
 @Tag("APITests")
@@ -134,12 +134,12 @@ public class APITests extends APIBaseTests {
 
         String nameResult = step("Послать измененные данные питомца в базу и получить новое имя", () ->
                 given(requestWithJsonContentSpec)
-                .body(pet)
-                .when()
-                .put("/")
-                .then()
-                .spec(responseSpec(200))
-                .extract().as(PetModel.class).getName());
+                        .body(pet)
+                        .when()
+                        .put("/")
+                        .then()
+                        .spec(responseSpec(200))
+                        .extract().as(PetModel.class).getName());
 
         step("Проверить измененное имя питомца", () -> {
             assertThat(nameResult).isEqualTo("BillBurr");
@@ -167,13 +167,13 @@ public class APITests extends APIBaseTests {
 
         ConfirmMessageModel changeMessage = step("Послать данные питомца в базу и получить присвоенный ему id", () ->
                 given(requestWithFormContentSpec)
-                .formParam("name","BillPurr")
-                .formParam("status","sold")
-                .when()
-                .post("/" + id)
-                .then()
-                .spec(responseSpec(200))
-                .extract().as(ConfirmMessageModel.class));
+                        .formParam("name", "BillPurr")
+                        .formParam("status", "sold")
+                        .when()
+                        .post("/" + id)
+                        .then()
+                        .spec(responseSpec(200))
+                        .extract().as(ConfirmMessageModel.class));
 
         step("Проверить сообщение об успехе операции", () -> {
             assertThat(changeMessage.getCode()).isEqualTo("200");
