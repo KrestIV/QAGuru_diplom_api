@@ -35,7 +35,7 @@ public class APITests extends APIBaseTests {
                         .extract().as(PetModel.class));
 
         step("Проверить соответствие отправленных и сохраненных данных", () -> {
-            assertThat(petResult.getId()).isNotEqualTo(0);
+            assertThat(petResult.getId()).isGreaterThan(0);
             assertThat(petResult.getCategory().getId()).isEqualTo(pet.getCategory().getId());
             assertThat(petResult.getCategory().getName()).isEqualTo(pet.getCategory().getName());
             assertThat(petResult.getPhotoUrls()).hasSameElementsAs(Arrays.stream(pet.getPhotoUrls()).toList());
@@ -105,7 +105,7 @@ public class APITests extends APIBaseTests {
 
         step("Проверить сообщение об успехе операции", () -> {
             assertThat(deleteMessage.getCode()).isEqualTo("200");
-            assertThat(deleteMessage.getType()).isNotNull();
+            assertThat(deleteMessage.getType()).isInstanceOf(String.class);
             assertThat(deleteMessage.getMessage()).isEqualTo(String.valueOf(id));
         });
 
@@ -176,7 +176,7 @@ public class APITests extends APIBaseTests {
 
         step("Проверить сообщение об успехе операции", () -> {
             assertThat(changeMessage.getCode()).isEqualTo("200");
-            assertThat(changeMessage.getType()).isNotNull();
+            assertThat(changeMessage.getType()).isInstanceOf(String.class);
             assertThat(changeMessage.getMessage()).isEqualTo(String.valueOf(id));
         });
 
