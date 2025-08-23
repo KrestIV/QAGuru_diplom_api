@@ -20,7 +20,7 @@ public class APITests extends APIBaseTests {
 
     @Test
     @Tag("smoke")
-    public void addingPetMustReturnCorrectAnswer() throws InterruptedException {
+    public void addingPetMustReturnCorrectAnswer() {
         PetModel pet = step("Подготовить данные питомца для добавления в базу", () ->
                 new PetModel(faker));
 
@@ -29,11 +29,10 @@ public class APITests extends APIBaseTests {
                 given(requestWithJsonContentSpec)
                         .body(pet)
                         .when()
-                        .post("/")
+                        .post("/pet")
                         .then()
                         .spec(responseSpec(200))
                         .extract().as(PetModel.class));
-        Thread.sleep(1000);
 
         step("Проверить соответствие отправленных и сохраненных данных", () -> {
             assertThat(petResult.getId()).isNotEqualTo(0);
@@ -54,7 +53,7 @@ public class APITests extends APIBaseTests {
                 given(requestWithJsonContentSpec)
                         .body(pet)
                         .when()
-                        .post("/")
+                        .post("/pet")
                         .then()
                         .spec(responseSpec(200))
                         .extract().as(PetModel.class).getId());
@@ -63,7 +62,7 @@ public class APITests extends APIBaseTests {
 
         PetModel petResult = step("Получить данные питомца по его id", () -> given(requestNoContentSpec)
                 .when()
-                .get("/" + id)
+                .get("/pet/" + id)
                 .then()
                 .spec(responseSpec(200))
                 .extract().as(PetModel.class));
@@ -89,7 +88,7 @@ public class APITests extends APIBaseTests {
                 given(requestWithJsonContentSpec)
                         .body(pet)
                         .when()
-                        .post("/")
+                        .post("/pet")
                         .then()
                         .spec(responseSpec(200))
                         .extract().as(PetModel.class).getId());
@@ -99,7 +98,7 @@ public class APITests extends APIBaseTests {
         ConfirmMessageModel deleteMessage = step("Удалить питомца из базы и получить подтверждение удаления", () ->
                 given(requestNoContentSpec)
                         .when()
-                        .delete("/" + id)
+                        .delete("/pet/" + id)
                         .then()
                         .spec(responseSpec(200))
                         .extract().as(ConfirmMessageModel.class));
@@ -121,7 +120,7 @@ public class APITests extends APIBaseTests {
                 given(requestWithJsonContentSpec)
                         .body(pet)
                         .when()
-                        .post("/")
+                        .post("/pet/")
                         .then()
                         .spec(responseSpec(200))
                         .extract().as(PetModel.class).getId());
@@ -136,7 +135,7 @@ public class APITests extends APIBaseTests {
                 given(requestWithJsonContentSpec)
                         .body(pet)
                         .when()
-                        .put("/")
+                        .put("/pet")
                         .then()
                         .spec(responseSpec(200))
                         .extract().as(PetModel.class).getName());
@@ -158,7 +157,7 @@ public class APITests extends APIBaseTests {
                 given(requestWithJsonContentSpec)
                         .body(pet)
                         .when()
-                        .post("/")
+                        .post("/pet")
                         .then()
                         .spec(responseSpec(200))
                         .extract().as(PetModel.class).getId());
@@ -170,7 +169,7 @@ public class APITests extends APIBaseTests {
                         .formParam("name", "BillPurr")
                         .formParam("status", "sold")
                         .when()
-                        .post("/" + id)
+                        .post("/pet/" + id)
                         .then()
                         .spec(responseSpec(200))
                         .extract().as(ConfirmMessageModel.class));

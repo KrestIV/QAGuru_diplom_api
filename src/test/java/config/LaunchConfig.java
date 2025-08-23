@@ -11,4 +11,7 @@ public interface LaunchConfig extends Config {
     @Key("url.base")
     String getBaseUrl();
 
+    @Key("path.base")
+    String getBasePath();
+
 }

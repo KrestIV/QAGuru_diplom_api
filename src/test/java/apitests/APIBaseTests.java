@@ -12,5 +12,6 @@ public class APIBaseTests {
         LaunchConfig config = ConfigFactory.create(LaunchConfig.class, System.getProperties());
 
         RestAssured.baseURI = config.getBaseUrl();
+        RestAssured.basePath = config.getBasePath();
     }
 }
