@@ -164,7 +164,7 @@ public class APITests extends APIBaseTests {
 
         Thread.sleep(1000);
 
-        ConfirmMessageModel changeMessage = step("Послать данные питомца в базу и получить присвоенный ему id", () ->
+        ConfirmMessageModel changeMessage = step("Послать измененные данные питомца в базу", () ->
                 given(requestWithFormContentSpec)
                         .formParam("name", "BillPurr")
                         .formParam("status", "sold")
