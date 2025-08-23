@@ -19,7 +19,6 @@
 <a href="https://www.java.com/ru/"><img width="8%" title="Java" src="media/java-original.svg" alt="java_logo"></a>
 <a href="https://www.jetbrains.com/idea/"><img width="8%" title="IntelliJ IDEA" src="media/intellij-original.svg" alt="intelliJIDEA_logo"></a>
 <a href="https://rest-assured.io/"><img width="8%" title="REST-assured" src="media/rest_assured.png" alt="REST-assured_logo"></a>
-<a href="https://aerokube.com/selenoid/"><img width="8%" title="Selenoid" src="media/Selenoid.svg" alt="selenoid_logo"></a>
 <a href="https://allurereport.org/"><img width="8%" title="Allure Report" src="media/Allure_Report.svg" alt="allure_logo"></a>
 <a href="https://gradle.org/"><img width="8%" title="Gradle" src="media/Gradle.svg" alt="gradle_logo"></a>
 <a href="https://junit.org/junit5/"><img width="8%" title="JUnit5" src="media/junit-original-wordmark.svg" alt="jUnit5_logo"></a>
@@ -31,8 +30,7 @@
 Автотесты в проекте написаны на <code>Java</code> с использованием
 библиотеки [REST-assured](https://rest-assured.io/),  
 сборщик - <code>Gradle</code>,  
-фреймворк модульного тестирования - <code>JUnit 5</code>,  
-удаленный запуск браузера и прохождение сценариев - [Selenoid](https://aerokube.com/selenoid/),  
+фреймворк модульного тестирования - <code>JUnit 5</code>,    
 управление удаленным запуском, настройка параметров и формирование отчета - <code>Jenkins + Allure</code>.  
 Реализована отправка результатов в <code>Telegram</code> при помощи бота.
 
@@ -63,9 +61,6 @@
 
 - **TASK** - Параметр, определяющий набор тестов для запуска
 - **PLATFORM** - Платформа для выполнения автотестов
-- **SERVER** - Адрес сервера выполнения тестов
-- **LOGIN** - Логин для доступа к серверу выполнения тестов
-- **PASSWORD** - пароль для доступа к серверу выполнения тестов
 - **COMMENT** - Параметр, определяющий текст сообщения в боте уведомлений
 
 ### Allure-отчеты
